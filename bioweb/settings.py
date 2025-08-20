@@ -14,7 +14,8 @@ import os, sys
 from pathlib import Path
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+#BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 
@@ -36,7 +37,7 @@ ALLOWED_HOSTS = ['localhost',
                  '127.0.0.1',
                  '.coursera-apps.org',
                  '.coursera.org',
-                '']+ os.environ.get("ALLOWED_HOSTS", "").split()
+                'tb136.herokuapp.com',]+ os.environ.get("ALLOWED_HOSTS", "").split()
 
 # Application definition
 
