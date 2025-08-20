@@ -47,7 +47,6 @@ setuptools==80.9.0
 six==1.17.0
 soupsieve==2.7
 sqlparse==0.4.4
-swagger-client @ file:///home/thomas/Documents/year3/cm3035/week14/python_client
 Twisted==25.5.0
 txaio==25.6.1
 typing_extensions==4.14.1
