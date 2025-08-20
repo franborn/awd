@@ -10,12 +10,40 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
-import os
+import os, sys
+
+if LOG_TO_STDOUT:
+    LOGGING = {
+        "version": 1,
+        "disable_existing_loggers": False,
+        "handlers": {
+            "console": {"class": "logging.StreamHandler", "stream": sys.stdout},
+        },
+        "root": {"handlers": ["console"], "level": os.getenv("DJANGO_LOG_LEVEL", "INFO")},
+        "loggers": {
+            "django": {"handlers": ["console"], "level": os.getenv("DJANGO_LOG_LEVEL", "INFO"), "propagate": False},
+        },
+    }
+else:
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    os.makedirs(os.path.join(os.path.dirname(BASE_DIR), "logs"), exist_ok=True)
+    LOGGING = {
+        "version": 1,
+        "disable_existing_loggers": False,
+        "handlers": {
+            "file": {
+                "class": "logging.FileHandler",
+                "filename": os.path.join(os.path.dirname(BASE_DIR), "logs", "django.log"),
+            },
+        },
+        "root": {"handlers": ["file"], "level": "INFO"},
+        "loggers": {"django": {"handlers": ["file"], "level": "INFO", "propagate": False}},
+    }
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
+LOG_TO_STDOUT = os.environ.get("LOG_TO_STDOUT") == "1"
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
