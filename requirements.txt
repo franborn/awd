@@ -21,9 +21,11 @@ cryptography==45.0.6
 daphne==2.5.0
 Django==3.1.14
 django-bootstrap4==2.2.0
+dj-database-url
 djangorestframework==3.11.1
 factory_boy==3.0.1
 Faker==37.4.2
+gunicorn
 hiredis==3.2.1
 hyperlink==21.0.0
 idna==3.10
