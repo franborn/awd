@@ -34,12 +34,11 @@ SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "insecure-dev-key")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['localhost',
-                 '127.0.0.1',
-                 '.coursera-apps.org',
-                 '.coursera.org',
-                'tb136.herokuapp.com',
-                'tb136-eb3aa81f6d14.herokuapp.com']+ os.environ.get("ALLOWED_HOSTS", "").split()
+ALLOWED_HOSTS = [
+  "tb136-eb3aa81f6d14.herokuapp.com",
+  "tb136.herokuapp.com",
+  "localhost","127.0.0.1",".coursera-apps.org",".coursera.org"
+] + os.environ.get("ALLOWED_HOSTS","").split()
 
 # Application definition
 
