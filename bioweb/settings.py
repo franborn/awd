@@ -12,12 +12,13 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os, sys
 from pathlib import Path
+import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 #BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
+IS_HEROKU = os.environ.get("DYNO") is not None
 
 
 
@@ -37,7 +38,8 @@ ALLOWED_HOSTS = ['localhost',
                  '127.0.0.1',
                  '.coursera-apps.org',
                  '.coursera.org',
-                'tb136.herokuapp.com',]+ os.environ.get("ALLOWED_HOSTS", "").split()
+                'tb136.herokuapp.com',
+                'tb136-eb3aa81f6d14.herokuapp.com']+ os.environ.get("ALLOWED_HOSTS", "").split()
 
 # Application definition
 
@@ -87,16 +89,21 @@ WSGI_APPLICATION = 'bioweb.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'bioweb_db',
-        'USER': 'thomas',
-        'PASSWORD': 'as',
-        'HOST': 'localhost',
-        'PORT': '5432',
+if IS_HEROKU:
+    DATABASES = {
+        "default": dj_database_url.config(conn_max_age=600, ssl_require=True)
     }
-}
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql_psycopg2",
+            "NAME": "bioweb_db",
+            "USER": "thomas",
+            "PASSWORD": "as",
+            "HOST": "localhost",
+            "PORT": "5432",
+        }
+    }
 
 
 # Password validation
