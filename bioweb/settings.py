@@ -29,7 +29,7 @@ LOG_TO_STDOUT = os.environ.get("LOG_TO_STDOUT") == "1"
 # SECURITY WARNING: keep the secret key used in production secret!
 #SECRET_KEY = '))om(68r(=jl)lzj#70zkhv*h8x25h9ga$w*i($&r6fsup#tm%'
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "insecure-dev-key")
-DEBUG = os.environ.get("DEBUG", "0") == "1"
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
